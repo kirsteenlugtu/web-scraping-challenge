@@ -3,7 +3,8 @@ from bs4 import BeautifulSoup as bs
 from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
 
-def scrape:
+
+def scrape():
 
     # Setup splinter
     executable_path = {'executable_path': ChromeDriverManager().install()}
@@ -25,6 +26,7 @@ def scrape:
 
     browser.quit()
 
+    # -------------------------------------------------------------------
     executable_path = {'executable_path': ChromeDriverManager().install()}
     browser = Browser('chrome', **executable_path, headless=False)
 
@@ -42,6 +44,7 @@ def scrape:
 
     browser.quit()
 
+    # -------------------------------------------------------------------
     executable_path = {'executable_path': ChromeDriverManager().install()}
     browser = Browser('chrome', **executable_path, headless=False)
 
@@ -55,6 +58,7 @@ def scrape:
 
     browser.quit()
 
+    # -------------------------------------------------------------------
     # Setup splinter
     executable_path = {'executable_path': ChromeDriverManager().install()}
     browser = Browser('chrome', **executable_path, headless=False)
@@ -134,7 +138,11 @@ def scrape:
 
     hemisphere_image_urls[3]['img_url'] = imgURL
 
-    mars_data = {
+    browser.quit()
+
+    # -------------------------------------------------------------------
+    # store all data in a dictionary 
+    listings = {
     'title' : news_title,
     'news' : news_p,
     'mars_image' : featured_image_url,
@@ -142,9 +150,13 @@ def scrape:
     'hemis' : hemisphere_image_urls
     }
 
-    return mars_data
+    print("New Mars data loaded!")
 
+    return listings
 
+scrape()
+
+print(f'{listings.title}')
 
 
 

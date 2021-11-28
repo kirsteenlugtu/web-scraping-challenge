@@ -11,10 +11,10 @@
         <div class = "container">
             <div class = "row">
                 <div class = "col-md-12">
-                    <div class = "scrape_header"
-                        <h1>Mission to Mars</h1>
+                    <div class = "scrape_header">
+                        <h1 class="jumbotron">Mission to Mars</h1>
                         <br>
-                        <button type="button" class="btn btn-primary btn-lg">Scrape New Data</button>
+                        <button type="button" class="btn btn-primary btn-lg" href="/scrape" >Scrape New Data</button>
                     </div>
                 </div>
 
@@ -24,6 +24,8 @@
                 <div class="news_section">
 
                     <h3>Latest Mars News</h3>
+                    <h5>{{ listings.title }}</h5>
+                    <p>{{ listings.news }}</p>
 
                 </div>
             </div>
@@ -32,10 +34,12 @@
                 <div class="image_table_section">
                     <div class="col-md-8">
                         <h3>Featured Mars Image</h3>
+                        <img src="{{ listings.mars_image }}" alt="Featured Mars image">
                     </div>
 
                     <div class="col-md-4">
                         <h3>Mars Facts</h3>
+                        <p>{{ listings.facts }}</p>
                     </div>
                 </div>
             </div>
@@ -46,8 +50,27 @@
                 </div>
             </div>
 
+            <!-- Hemispheres in cards -->
             <div class="row">
-                <div class="col-sm-12 col-md-3">
+
+                {% for hemi in listings.hemis %}
+
+                    <div class="col-sm-12 col-md-3">
+                        <div class="card">
+                            <!-- <img src="..." class="card-img-top" alt="..."> -->
+                            <img src={{ hemi.image_url }} class="card-img-top" alt={{ hemi.title }}>
+                            <div class="card-body">
+                            <!-- <h5 class="card-title">Card title</h5> -->
+                            <h5 class="card-title">{{ hemi.title }}</h5>
+                            <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+                <!-- <div class="col-sm-12 col-md-3">
                     <div class="card">
                         <img src="..." class="card-img-top" alt="...">
                         <div class="card-body">
@@ -78,18 +101,7 @@
                           <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                       </div>
-                </div>
-
-                <div class="col-sm-12 col-md-3">
-                    <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                      </div>
-                </div>
+                </div> -->
 
             </div>
 

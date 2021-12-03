@@ -51,10 +51,11 @@ def scrape():
     url = 'https://galaxyfacts-mars.com/'
     tables = pd.read_html(url)
 
-    mars_df=tables[1]
+    mars_df = tables[1]
+    mars_df =mars_df.rename(columns={0:'',1:""})
 
     # Convert table to html table
-    mars_table_html = mars_df.to_html()
+    mars_table_html = mars_df.to_html(classes='table table-striped', index=False)
 
     browser.quit()
 
@@ -91,9 +92,10 @@ def scrape():
     soup = bs(html, 'html.parser')
 
     results = soup.find_all('a', target='_blank') 
-    imgURL = results[3]['href']
+    imgURL = results[2]['href']
     imgURL = url + imgURL
 
+    # add to list
     hemisphere_image_urls[0]['img_url'] = imgURL
 
     # Retrieve image url for second hemisphere
@@ -105,7 +107,7 @@ def scrape():
     soup = bs(html, 'html.parser')
 
     results = soup.find_all('a', target='_blank') 
-    imgURL = results[3]['href']
+    imgURL = results[2]['href']
     imgURL = url + imgURL
 
     hemisphere_image_urls[1]['img_url'] = imgURL
@@ -119,7 +121,7 @@ def scrape():
     soup = bs(html, 'html.parser')
 
     results = soup.find_all('a', target='_blank') 
-    imgURL = results[3]['href']
+    imgURL = results[2]['href']
     imgURL = url + imgURL
 
     hemisphere_image_urls[2]['img_url'] = imgURL
@@ -133,7 +135,7 @@ def scrape():
     soup = bs(html, 'html.parser')
 
     results = soup.find_all('a', target='_blank') 
-    imgURL = results[3]['href']
+    imgURL = results[2]['href']
     imgURL = url + imgURL
 
     hemisphere_image_urls[3]['img_url'] = imgURL
@@ -142,12 +144,13 @@ def scrape():
 
     # -------------------------------------------------------------------
     # store all data in a dictionary 
+
     listings = {
-    'title' : news_title,
-    'news' : news_p,
-    'mars_image' : featured_image_url,
-    'facts' : mars_table_html,
-    'hemis' : hemisphere_image_urls
+        'title' : news_title,
+        'news' : news_p,
+        'mars_image' : featured_image_url,
+        'facts' : mars_table_html,
+        'hemis' : hemisphere_image_urls
     }
 
     print("New Mars data loaded!")

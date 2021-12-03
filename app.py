@@ -20,6 +20,8 @@ def index():
 def scraper():
     listings = mongo.db.listings
     listings_data = scrape_mars.scrape()
+    print('LISTING_DATA BELOW')
+    print(listings_data)
     listings.update({}, listings_data, upsert=True)
     return redirect("/", code=302)
 
